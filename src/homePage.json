@@ -1,0 +1,28 @@
+{
+  "body": {
+    "slider": {
+      "type": "slider",
+      "items": [
+        {
+          "type": "news",
+          "newsId": 111111,
+          "image": "http://imageSource.png",
+          "title": "Dünyanın en iyi backEnd Hizmeti",
+          "spot": "gerekirse koyarız bunu da",
+          "appUrl": "local://haber/detay/{newsId}"
+        },
+        {
+          "type": "news",
+          "newsId": 222222,
+          "image": "http://imageSource.png",
+          "title": "Dünyanın en iyi backEnd Hizmeti",
+          "spot": "gerekirse koyarız bunu da",
+          "appUrl": "local://haber/detay/{newsId}"
+        }
+      ]
+    },
+    "weather": {
+      "type": "weather"
+    }
+  }
+}
