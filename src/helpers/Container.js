@@ -1,16 +1,21 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet, SafeAreaView } from "react-native";
+import { useSelector } from "react-redux";
 
 function Container (props) {
-    return (
+  const darkModeEnable = useSelector((state) => state.homeReducer.isDarkMode);
+
+  return (
+    <SafeAreaView style={{backgroundColor:  darkModeEnable ? '#131313' : '#f3f3f3'}}>
       <View
         style={[
           styles.container,
-          {backgroundColor: 'white'},
+          {backgroundColor: darkModeEnable ? 'black' : 'white'},
           props.style,
         ]}>
         {props.children}
       </View>
+    </SafeAreaView>
     );
 }
 export default React.memo(Container);

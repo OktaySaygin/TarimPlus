@@ -5,8 +5,10 @@ import Container from "../../helpers/Container";
 import { fetchMyAPI, screenWidth } from "../../utils";
 import FastImage from "react-native-fast-image";
 import { useSelector } from "react-redux";
+import NavigationService from "../../navigation/NavigationService";
 
 const NewsPage = (props) => {
+  const darkModeEnable = useSelector((state) => state.homeReducer.isDarkMode);
   const profileData = useSelector((state) => state.homeReducer.profileData);
   const [data, setData] = useState(null);
   const scrollViewRef = useRef(null);
@@ -73,14 +75,14 @@ const NewsPage = (props) => {
           source={{uri: data?.headerImage}}
           style={{aspectRatio: 16/9, width: screenWidth}}
           resizeMode={'contain'}>
-          <TouchableOpacity onPress={() => props?.navigation?.goBack()}
+          <TouchableOpacity onPress={() => NavigationService.back()}
             style={{backgroundColor: 'gray', width: 45, aspectRatio: 1, borderRadius: 45, alignItems: 'center', justifyContent: 'center', margin: 10}}>
             <FastImage style={{aspectRatio: 1, width: 30}}
                        source={require('../../assets/icons/arrowLeft.png')}
                        resizeMode={'contain'}/>
           </TouchableOpacity>
         </FastImage>
-      <ScrollView style={{borderRadius: 20, marginTop: -top, backgroundColor: 'white'}} ref={scrollViewRef} showsVerticalScrollIndicator={false}>
+      <ScrollView style={{borderRadius: 20, marginTop: -top, backgroundColor: darkModeEnable ? 'black' : 'white'}} ref={scrollViewRef} showsVerticalScrollIndicator={false}>
         <FlatList
           ref={scrollViewRef}
           scrollEnabled={false}

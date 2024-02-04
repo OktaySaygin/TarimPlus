@@ -8,7 +8,7 @@ import FastImage from "react-native-fast-image";
 function VegetableMarket(props) {
   return (
     <Container>
-      <View style={{flex: 1, marginTop: 10, marginHorizontal: 20}}>
+      <View style={{flex: 1, marginTop: 10}}>
         <Text>Hal</Text>
       </View>
     </Container>

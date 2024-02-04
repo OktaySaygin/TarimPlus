@@ -54,7 +54,7 @@ const Login = (props) => {
       if (response.status) {
         dispatch(setProfileData({data: response.body}));
         //store.dispatch(setProfile({data: response.body}));
-        props?.navigation?.navigate(routes.HomePage);
+        NavigationService.navigateToScreenName(routes.HomePage);
       }
       else {
         console.warn("hatali giris")
@@ -87,7 +87,7 @@ const Login = (props) => {
         </TouchableOpacity>
         <View style={{marginTop: 10, flexDirection: 'row'}}>
           <Text style={{fontSize: 12}} color={'red'}>Hesabınız yoktuur o zaman kayıt ola</Text>
-          <TouchableOpacity onPress={() => props?.navigation?.push(routes.Register)}>
+          <TouchableOpacity onPress={() => NavigationService.navigateToScreenName(routes.Register)}>
             <Text size={12} style={{textDecorationLine: 'underline', marginLeft: 20, color: getThemeColor(props?.isDarkMode)}}>Kayıt Ol</Text>
           </TouchableOpacity>
         </View>

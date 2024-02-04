@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, StyleSheet, TextInput} from 'react-native';
+import { useSelector } from "react-redux";
 
 if (Text.defaultProps == null) {
   Text.defaultProps = {};
@@ -12,6 +13,8 @@ if (TextInput.defaultProps == null) {
 }
 
 function CustomText(props) {
+  const darkModeEnable = useSelector((state) => state.homeReducer.isDarkMode);
+
   const types = {
     bold: styles.bold,
     italic: styles.italic,
@@ -23,7 +26,7 @@ function CustomText(props) {
   const passedStyles = {...style};
   const textStyle = types[type] || styles.regular;
   passedStyles.fontSize = props?.size || style?.fontSize;
-  passedStyles.color = props?.color == null && style.color == null ? (props?.isDarkMode ? 'white' : 'black') : props?.color == null ? style.color : props?.color;
+  passedStyles.color = props?.color == null && style.color == null ? (darkModeEnable ? 'white' : 'black') : props?.color == null ? style.color : props?.color;
 
   return (
     <Text {...props} style={[textStyle, passedStyles]}>

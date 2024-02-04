@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import Container from "../../helpers/Container";
 import Text from "../../helpers/Text";
 import routes from "../../navigation/routes";
+import NavigationService from "../../navigation/NavigationService";
 
 const Weather = (props) => {
   const [generalState, setGeneralState] = useState({
@@ -13,7 +14,7 @@ const Weather = (props) => {
 
 
   useEffect(() => {
-    console.warn("props: ",props?.route?.params?.items);
+    //console.warn("props: ",props?.route?.params?.items);
     return () => {
       setGeneralState(null);
     }
@@ -24,10 +25,7 @@ const Weather = (props) => {
       <SafeAreaView style={{flex: 1}}>
         <Text>weather</Text>
         <TouchableOpacity onPress={() => {
-          //setIsVisible(false);
-          props?.navigation.goBack(); // <-- this fixed it
-
-
+          NavigationService.back();
         }}>
           <Text style={{fontSize: 20}}>X</Text>
         </TouchableOpacity>
@@ -36,21 +34,5 @@ const Weather = (props) => {
     </View>
   );
 };
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-    },
-    dispatch,
-  );
-
-const mapStateToProps = state => {
-  return {
-    isDarkMode: state.homePage.isDarkMode,
-  };
-};
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(React.memo(Weather));
+export default React.memo(Weather);
 

@@ -1,17 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, TouchableOpacity, Text, Image, Modal } from "react-native";
+import { View, TouchableOpacity, Text, Image, Modal, SafeAreaView } from "react-native";
 import { RNCamera } from 'react-native-camera';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 import NavigationService from "../../navigation/NavigationService";
-import { bindActionCreators } from "redux";
 import { connect, useSelector } from "react-redux";
-import Garden from "../garden";
 import Container from "../../helpers/Container";
 import config from "../../api/config";
-import store from "../../store";
-import routes from "../../navigation/routes";
+import FastImage from "react-native-fast-image";
 
-const Camera = (props) => {
+function Camera(props) {
   const profileData = useSelector((state) => state.homeReducer.profileData);
   const cameraRef = useRef(null);
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -64,9 +61,6 @@ const Camera = (props) => {
     catch (e) {
       console.warn("error: ",e);
     }
-
-
-
   }
 
   const takePicture = async () => {
@@ -85,11 +79,11 @@ const Camera = (props) => {
       //   });
     }
     setIsModalVisible(false);
-    props?.navigation?.goBack();
+    NavigationService.back();
   };
 
   return (
-    <Container style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       {isModalVisible ? (
           <RNCamera
             ref={cameraRef}
@@ -97,36 +91,33 @@ const Camera = (props) => {
             type={RNCamera.Constants.Type.back}
             flashMode={RNCamera.Constants.FlashMode.off}
             captureAudio={false}>
-            <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'center', marginBottom: 100}}>
-              <TouchableOpacity
-                  onPress={takePicture}
-                  style={{width: 80, aspectRatio: 1, borderColor: '#007533', borderRadius: 80, borderWidth: 3, alignItems: 'center', justifyContent: 'center' }}>
-                <View style={{width: 60, aspectRatio: 1, backgroundColor: '#007569', borderRadius: 60 }}/>
-              </TouchableOpacity>
-            </View>
+            <SafeAreaView style={{flex: 1, justifyContent: 'space-between'}}>
+              <View style={{marginLeft: 25}}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsModalVisible(false);
+                    NavigationService.back();
+                  }}
+                  style={{width: 45, aspectRatio: 1, backgroundColor: 'white', borderRadius: 80, alignItems: 'center', justifyContent: 'center' }}>
+                  <FastImage
+                    source={require('../../assets/buttons/arrowLeft.png')}
+                    style={{width: 20, aspectRatio: 1}}/>
+                </TouchableOpacity>
+              </View>
+              <View style={{alignItems: 'center', marginBottom: 60}}>
+                <TouchableOpacity
+                    onPress={takePicture}
+                    style={{width: 80, aspectRatio: 1, borderColor: 'white', borderRadius: 80, borderWidth: 3, alignItems: 'center', justifyContent: 'center' }}>
+                  <View style={{width: 60, aspectRatio: 1, backgroundColor: 'white', borderRadius: 60 }}/>
+                </TouchableOpacity>
+              </View>
+            </SafeAreaView>
           </RNCamera>
       ) :
         null
       }
-    </Container>
+    </View>
   );
 };
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-    },
-    dispatch,
-  );
-
-const mapStateToProps = state => {
-  return {
-    isDarkMode: state.homePage.isDarkMode,
-    screenHeight: state.homePage.screenHeight,
-    screenWidth: state.homePage.screenWidth,
-    profileData: state.loginPage.profileData,
-    profileGarden: state.gardenPage.profileGarden,
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(Camera));
+export default React.memo(Camera);
 

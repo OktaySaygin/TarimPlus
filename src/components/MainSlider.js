@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { FlatList, TouchableWithoutFeedback, View } from "react-native";
+import { FlatList, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import Text from "../helpers/Text";
 import { Carousel, Pagination } from "react-native-snap-carousel";
 import FastImage from "react-native-fast-image";
@@ -7,16 +7,20 @@ import LinearGradient from "react-native-linear-gradient";
 import NavigationService from "../navigation/NavigationService";
 import routes from "../navigation/routes";
 import { screenWidth } from "../utils";
+import { useSelector } from "react-redux";
 
 const MainSlider = (props) => {
+  const darkModeEnable = useSelector((state) => state.homeReducer.isDarkMode);
   const [currentIndex, setCurrentIndex] = useState(0);
   const keyExtractor = useCallback((item, index) => index, []);
   const renderItem = ({item, index}) => {
     return (
-      <TouchableWithoutFeedback onPress={() => {
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {
         NavigationService.navigateToScreenName(routes.NewsPage, {newsId: item?.id})
         // props?.navigation?.push(routes.NewsPage, {newsId: item?.id})
-      }}>
+      }} style={{marginRight: 14}}>
         <View>
           <FastImage
             source={{uri: item?.image}}
@@ -34,10 +38,10 @@ const MainSlider = (props) => {
             />
             <Text style={{marginBottom: 10, color: 'white', height: 60, marginHorizontal: 16}} numberOflibes={2} size={20} type={'bold'}>{item?.spot}</Text>
           </FastImage>
-          <Text style={{marginTop: 5, color: 'black', marginHorizontal: 10}} size={16} numberOfLines={3}>{item?.title}</Text>
+          <Text style={{marginTop: 5, marginHorizontal: 10}} size={16} numberOfLines={3}>{item?.title}</Text>
 
         </View>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
 
     )
   }
@@ -48,9 +52,6 @@ const MainSlider = (props) => {
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         decelerationRate={0.5}
-        slideStyle={{
-          marginRight: 20,
-        }}
         sliderWidth={screenWidth - 40}
         itemWidth={(screenWidth - 40) / 1.2}
         inactiveSlideScale={1}
@@ -66,6 +67,8 @@ const MainSlider = (props) => {
         }}
       />
       <Pagination
+        inactiveDotColor={darkModeEnable ? 'white' : 'black'}
+        dotColor={darkModeEnable ? 'white' : 'black'}
         dotsLength={props?.item?.items?.length}
         activeDotIndex={currentIndex}
         containerStyle={{marginVertical: -15}}/>

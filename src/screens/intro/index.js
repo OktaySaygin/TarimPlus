@@ -7,6 +7,7 @@ import FastImage from "react-native-fast-image";
 import LinearGradient from "react-native-linear-gradient";
 import routes from "../../navigation/routes";
 import { screenWidth, screenHeight } from "../../utils";
+import NavigationService from "../../navigation/NavigationService";
 
 const IntroPage = (props) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -15,10 +16,10 @@ const IntroPage = (props) => {
     <Modal style={{width: '100%'}} visible={isVisible}>
       <FastImage
           source={require('../../assets/backgrounds/splashScreen.jpg')}
-          style={{width: screenWidth, screenHeight, justifyContent: 'center'}}
+          style={{width: screenWidth, height: screenHeight, justifyContent: 'center'}}
           resizeMode={'cover'}/>
       <LinearGradient
-        colors={['transparent', 'rgba(0,37,35,0.9)']}
+        colors={['transparent', '#223420']}
         // start={{x: 0, y: 0}}
         // end={{x: 0, y: 1}}
         style={{
@@ -34,19 +35,19 @@ const IntroPage = (props) => {
 
         <TouchableOpacity
           onPress={() => {
-              setIsVisible(false);
-            props?.navigation?.push(routes.Register);
+            setIsVisible(false);
+            NavigationService.navigateToScreenName(routes.Register);
           }}
-          style={{flex: 1, marginTop: 40, borderWidth: 2, borderColor: 'white', alignItems: 'center', justifyContent: 'center', padding: 12}}>
+          style={{flex: 1, marginTop: 40, borderWidth: 2, borderColor: 'white', alignItems: 'center', justifyContent: 'center', padding: 12, borderRadius: 6}}>
           <Text size={18} type={'italicBold'} style={{color: '#FFFFFF'}}>Kayıt Ol</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
               setIsVisible(false);
-            props?.navigation?.push(routes.Login);
+              NavigationService.navigateToScreenName(routes.Login);
           }}
-          style={{flex: 1, marginTop: 20, borderWidth: 2, borderColor: 'white', alignItems: 'center', justifyContent: 'center', padding: 12}}>
-          <Text size={18} type={'italicBold'} style={{color: '#FFFFFF'}}>Giriş Yap</Text>
+          style={{flex: 1, marginTop: 20, backgroundColor: 'white', alignItems: 'center', justifyContent: 'center', padding: 12, borderRadius: 6}}>
+          <Text size={18} type={'italicBold'} style={{color: '#323C06'}}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>
     </Modal>

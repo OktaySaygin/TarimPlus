@@ -11,7 +11,7 @@ const HeaderLeft = (props) => (
     <View style={{flexDirection:'row'}}>
         <TouchableOpacity onPress={() => {
             if (props?.route.name === routes.HomePage) {
-              props?.navigation?.navigateModal(routes.LoginModal);
+              NavigationService.navigateModal(routes.LoginModal);
                 //console.warn('Search touch');
                 // NavigationService.navigate('ModalStack', {
                 //   screen: routes.SearchModal,
@@ -37,7 +37,7 @@ const HeaderLeft = (props) => (
 );
 
 const HeaderRight = (props) => (
-    <TouchableOpacity onPress={() => props?.navigation?.push(routes.Settings)}>
+    <TouchableOpacity onPress={() => NavigationService.navigateToScreenName(routes.Settings)}>
         <View
             style={{
               flex: 1,

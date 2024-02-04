@@ -4,11 +4,13 @@ import Text from "../../helpers/Text";
 import Container from "../../helpers/Container";
 import { fetchMyAPI, fetchMyAPI2, getThemeColor } from "../../utils";
 import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import FastImage from "react-native-fast-image";
 import routes from "../../navigation/routes";
+import NavigationService from "../../navigation/NavigationService";
 
-const MessagePage = (props) => {
+function MessagePage (props) {
+  const darkModeEnable = useSelector((state) => state.homeReducer.isDarkMode);
   const [generalState, setGeneralState] = useState({
     messageData: [],
   });
@@ -33,10 +35,10 @@ const MessagePage = (props) => {
   const renderHeaderItem = () => {
     return (
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 10}}>
-        <Text style={{color: getThemeColor(props?.isDarkMode)}} type={'bold'} size={18}>Mesajlarım</Text>
+        <Text style={{color: getThemeColor(darkModeEnable)}} type={'bold'} size={18}>Mesajlarım</Text>
         <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
-            onPress={() => props?.navigation?.goBack()}
+            onPress={() => NavigationService.back()}
             style={{width: 50, aspectRatio: 1, marginRight: 10, backgroundColor: '#F7F7F9', borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
             <FastImage
               source={require('../../assets/buttons/arrowLeft.png')}
@@ -63,7 +65,7 @@ const MessagePage = (props) => {
             style={{width: 30, aspectRatio: 1}}
             resizeMode={'contain'}/>
         </View>
-        <TouchableWithoutFeedback onPress={() => props?.navigation?.push(routes.ChatPage, {data: item.channel_name})}>
+        <TouchableWithoutFeedback onPress={() => NavigationService.navigateToScreenName(routes.ChatPage, {data: item.channel_name})}>
           <View style={{marginHorizontal: 10, justifyContent: 'space-evenly', height: 50}}>
             <Text size={16} type={'bold'}>{item.userId}</Text>
             <Text>{item.message}</Text>
@@ -91,24 +93,7 @@ const MessagePage = (props) => {
           ListHeaderComponent={renderHeaderItem}
         />
       </View>
-
     </Container>
-  )
-}
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-    },
-    dispatch,
   );
-
-const mapStateToProps = state => {
-  return {
-    isDarkMode: state.homePage.isDarkMode,
-    screenHeight: state.homePage.screenHeight,
-    screenWidth: state.homePage.screenWidth,
-    profileData: state.loginPage.profileData,
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(React.memo(MessagePage));
+}
+export default React.memo(MessagePage);

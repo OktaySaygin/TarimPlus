@@ -5,6 +5,7 @@ const homeReducer = createSlice({
     name: 'homeReducer',
     initialState: {
         data: null,
+        isDarkMode: false,
         profileData: null,
         profileGarden: null,
     },
@@ -18,6 +19,9 @@ const homeReducer = createSlice({
         setProfileGarden: (state, action) => {
             state.profileGarden = action.payload;
         },
+        setDarkMode: (state, action) => {
+            state.isDarkMode = action.payload;
+        },
 
     },
 });
@@ -25,5 +29,6 @@ const homeReducer = createSlice({
 export const { setData,
     setProfileData,
     setProfileGarden,
+    setDarkMode
 } = homeReducer.actions;
 export default homeReducer.reducer;

@@ -4,6 +4,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { fetchMyAPIPost, getThemeColor, imageSource, screenWidth } from "../../utils";
 import Text from "../../helpers/Text";
 import routes from "../../navigation/routes";
+import NavigationService from "../../navigation/NavigationService";
 
 const Register = (props) => {
   const [generalState, setGeneralState] = useState({
@@ -18,7 +19,7 @@ const Register = (props) => {
     fetchMyAPIPost("/sign-up", generalState?.email, generalState?.password,
       generalState?.name, generalState?.secondName, generalState?.phone).then(response => {
       if (response.status) {
-        props?.navigation?.navigate(routes.Login);
+        NavigationService.navigateToScreenName(routes.Login);
       }
       else {
         console.warn("hatali giris")
@@ -113,7 +114,7 @@ const Register = (props) => {
       </TouchableOpacity>
       <View style={{marginTop: 10, flexDirection: 'row'}}>
         <Text style={{fontSize: 12}} color={'red'}>Hesabınız varsa giriş yapın</Text>
-        <TouchableOpacity onPress={() => props?.navigation?.push(routes.Login)}>
+        <TouchableOpacity onPress={() => NavigationService.navigateToScreenName(routes.Login)}>
           <Text size={12} style={{textDecorationLine: 'underline', marginLeft: 20, color: getThemeColor(props?.isDarkMode)}}>Giriş Yap</Text>
         </TouchableOpacity>
       </View>

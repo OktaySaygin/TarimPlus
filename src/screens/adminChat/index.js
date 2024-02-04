@@ -9,6 +9,7 @@ import Text from '../../helpers/Text';
 import FastImage from "react-native-fast-image";
 import {Pusher, PusherChannel, PusherEvent} from "@pusher/pusher-websocket-react-native";
 import Container from "../../helpers/Container";
+import NavigationService from "../../navigation/NavigationService";
 
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
@@ -251,7 +252,7 @@ function ChatAdminPage (props) {
       style={{ height: '100%' }}
     >
       <Container>
-        <TouchableOpacity onPress={() => props?.navigation?.goBack()}>
+        <TouchableOpacity onPress={() => NavigationService.back()}>
           <Text>geri dönn</Text>
         </TouchableOpacity>
 

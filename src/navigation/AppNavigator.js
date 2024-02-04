@@ -35,50 +35,43 @@ function App() {
                 headerShown: false,
               }}>
               <Stack.Group>
-                <Stack.Screen name={routes.IntroPage} component={IntroPage}/>
-                <Stack.Screen name={routes.Login} component={Login}/>
-                <Stack.Screen name={routes.Register} component={Register} />
+                <Stack.Screen name={routes.IntroPage} component={IntroPage} initialParams={{tabBarVal: 0}}/>
+                <Stack.Screen name={routes.Login} component={Login} initialParams={{tabBarVal: 0}}/>
+                <Stack.Screen name={routes.Register} component={Register} initialParams={{tabBarVal: 0}}/>
               </Stack.Group>
 
               <Stack.Group>
                 <Stack.Screen name={routes.HomePage} component={HomePage}/>
-
-                <Stack.Screen name={routes.Garden} component={Garden} options={{animation: 'flip', gestureEnabled: true}}/>
-                <Stack.Screen name={routes.MyGardenPage} component={MyGardenPage} options={{animation: 'flip'}}/>
+                <Stack.Screen name={routes.Garden} component={Garden}/>
+                <Stack.Screen name={routes.MyGardenPage} component={MyGardenPage}/>
                 <Stack.Screen name={routes.Medicine} component={Medicine}/>
-                {/*<Stack.Screen name={routes.Agro} component={Agro} />*/}
-                {/*<Stack.Screen name={routes.VegetableMarket} component={VegetableMarket} />*/}
-                {/*<Stack.Screen name={routes.Blog} component={Blog} />*/}
-                {/*<Stack.Screen name={routes.Settings} component={Settings}/>*/}
+                <Stack.Screen name={routes.Agro} component={Agro} />
+                <Stack.Screen name={routes.VegetableMarket} component={VegetableMarket} />
+                <Stack.Screen name={routes.Blog} component={Blog} />
+                <Stack.Screen name={routes.Settings} component={Settings}/>
                 <Stack.Screen name={routes.NewsPage} component={NewsPage} />
-                {/*<Stack.Screen name={routes.ChatPage} component={ChatPage} />*/}
-                {/*<Stack.Screen name={routes.MessagePage} component={MessagePage} />*/}
+                <Stack.Screen name={routes.ChatPage} component={ChatPage} />
+                <Stack.Screen name={routes.MessagePage} component={MessagePage} />
               </Stack.Group>
-              {/*<Stack.Group>*/}
-              {/*  <Stack.Screen name={routes.Profile} component={Profile} options={{presentation: "fullScreenModal"}}/>*/}
-              {/*  <Stack.Screen name={routes.Camera} component={Camera} options={{presentation: "fullScreenModal"}}/>*/}
-              {/*  <Stack.Screen name={routes.Weather} component={Weather} options={{presentation: "fullScreenModal"}}  />*/}
-              {/*</Stack.Group>*/}
+              <Stack.Group>
+               <Stack.Screen name={routes.Profile} component={Profile} options={{presentation: "fullScreenModal"}}/>
+               <Stack.Screen name={routes.Camera} component={Camera} options={{presentation: "fullScreenModal"}}/>
+               <Stack.Screen name={routes.Weather} component={Weather} options={{presentation: "fullScreenModal"}}  />
+              </Stack.Group>
             </Stack.Navigator>
       </GestureHandlerRootView>
     );
   }
 
   return (
-    <SafeAreaProvider>
-      {/*<SafeAreaView*/}
-      {/*  edges={["top"]}*/}
-      {/*  style={{ flex: 0, backgroundColor: "#f6f6f6" }}*/}
-      {/*/>*/}
-      <SafeAreaView style={{flex: 1}}>
+
         <NavigationContainer ref={navigationRef}>
           <Tab.Navigator tabBar={props => <TabBar {...props} />}
-                         screenOptions={{ headerShown: false }}>
+                         screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: 'black' }, }}>
             <Tab.Screen name="HomeStack" component={HomeStackScreen}/>
           </Tab.Navigator>
         </NavigationContainer>
-      </SafeAreaView>
-    </SafeAreaProvider>
+
   );
 }
 

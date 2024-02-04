@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 function Blog(props) {
   return (
     <Container>
-      <View style={{flex: 1, marginTop: 10, marginHorizontal: 20}}>
+      <View style={{flex: 1, marginTop: 10}}>
         <Text>Blog</Text>
       </View>
     </Container>
