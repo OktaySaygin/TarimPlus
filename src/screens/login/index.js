@@ -14,7 +14,7 @@ const Login = (props) => {
   const dispatch = useDispatch();
   const [generalState, setGeneralState] = useState({
     email: "yusufdede95@hotmail.com",
-    password: "dede123qwe",
+    password: "yusuf123qwe",
   });
 
   const input = (textName) => {

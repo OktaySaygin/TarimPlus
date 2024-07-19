@@ -10,6 +10,7 @@ import FastImage from "react-native-fast-image";
 
 function Camera(props) {
   const profileData = useSelector((state) => state.homeReducer.profileData);
+  const profileGarden = useSelector((state) => state.homeReducer.profileGarden);
   const cameraRef = useRef(null);
   const [isModalVisible, setIsModalVisible] = useState(true);
 
@@ -37,7 +38,11 @@ function Camera(props) {
       console.warn("error: ",e);
     }
   }
+
+  console.warn("asdasd: ",profileGarden?.data?.id)
   const photoPostAPI = async (imageBaseUrl) => {
+
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("token", profileData?.data[0]?.token);
@@ -47,7 +52,7 @@ function Camera(props) {
       headers: myHeaders,
       body: JSON.stringify({
         base64Image: imageBaseUrl,
-        theFieldId: props?.profileGarden?.data?.id
+        theFieldId: profileGarden?.data?.id
       }),
     };
 
@@ -65,7 +70,7 @@ function Camera(props) {
 
   const takePicture = async () => {
     if (cameraRef.current) {
-      const options = { quality: 0.7, base64: true };
+      const options = { quality: 0.2, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
       await photoPostAPI(data.base64);
 

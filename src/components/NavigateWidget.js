@@ -25,14 +25,18 @@ function NavigateWidget(props) {
   const checkGarden = async () => {
     try {
       const result = await fetchMyAPI("/the_field", profileData?.data[0]?.token);
+      console.warn("result: ",result)
       setGeneralState(prevState => {
         return {
           ...prevState,
           gardenData: result,
         };
       });
+//      NavigationService.navigateToScreenName(routes.Garden, {data: garden})
+
       let garden = result?.items?.find((value) => value.userId === profileData?.data[0].findUser?.id);
       if (garden !== undefined) {
+        console.warn("asdasd: ",garden)
         // store.dispatch(setProfileGarden({data: garden}));
         dispatch(setProfileGarden({data: garden}));
         NavigationService.navigateToScreenName(routes.MyGardenPage, {data: garden})

@@ -199,7 +199,7 @@ export async function fetchMyAPIPost(id, email, password, name="", secondName=""
       console.warn(body);
   })
   .catch(error => {
-    ToastAndroid.show("errorCode: ",error)
+   // ToastAndroid.show("errorCode: ",error)
     console.error("er: ",error);
     body = "Hatali giriş"
   });

@@ -30,6 +30,7 @@ function Home(props) {
         try {
           Geolocation.getCurrentPosition(
             async (position) => {
+              console.warn("asdasd: ",position.coords.latitude)
               const result = await fetchMyAPI("/get-weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude, profileData?.data[0]?.token);
               setGeneralState(prevState => {
                 return {

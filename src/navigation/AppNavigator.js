@@ -64,14 +64,12 @@ function App() {
   }
 
   return (
-
         <NavigationContainer ref={navigationRef}>
           <Tab.Navigator tabBar={props => <TabBar {...props} />}
                          screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: 'black' }, }}>
             <Tab.Screen name="HomeStack" component={HomeStackScreen}/>
           </Tab.Navigator>
         </NavigationContainer>
-
   );
 }
 
